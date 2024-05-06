@@ -1,0 +1,275 @@
+[
+  {
+    "unitNumber": 1,
+    "nameTitle": "Information Technology Systems",
+    "unitSize": 120,
+    "isExternalAssesment": true,
+    "priority": {
+      "certificate": "",
+      "extendedCertificate": "M",
+      "foundationDiploma": "M",
+      "diploma": "M",
+      "diplomaExtended": "M"
+    }
+  },
+  {
+    "unitNumber": 2,
+    "nameTitle": "Creating Systems to Manage Information",
+    "isExternalAssesment": true,
+    "unitSize": 90,
+    "priority": {
+      "certificate": "M",
+      "extendedCertificate": "M",
+      "foundationDiploma": "M",
+      "diploma": "M",
+      "diplomaExtended": "M"
+    }
+  },
+  {
+    "unitNumber": 3,
+    "nameTitle": "Using Social Media in Business",
+    "isExternalAssesment": false,
+    "unitSize": 90,
+    "priority": {
+      "certificate": "M",
+      "extendedCertificate": "M",
+      "foundationDiploma": "M",
+      "diploma": "M",
+      "diplomaExtended": "M"
+    }
+  },
+  {
+    "unitNumber": 4,
+    "nameTitle": "Programming",
+    "isExternalAssesment": false,
+    "unitSize": 90,
+    "priority": {
+      "certificate": "",
+      "extendedCertificate": "",
+      "foundationDiploma": "M",
+      "diploma": "M",
+      "diplomaExtended": "M"
+    }
+  },
+  {
+    "unitNumber": 5,
+    "nameTitle": "Data Modelling",
+    "isExternalAssesment": false,
+    "unitSize": 60,
+    "priority": {
+      "certificate": "",
+      "extendedCertificate": "O",
+      "foundationDiploma": "O",
+      "diploma": "O",
+      "diplomaExtended": "O"
+    }
+  },
+  {
+    "unitNumber": 6,
+    "nameTitle": "Website Development",
+    "isExternalAssesment": false,
+    "unitSize": 60,
+    "priority": {
+      "certificate": "",
+      "extendedCertificate": "O",
+      "foundationDiploma": "O",
+      "diploma": "O",
+      "diplomaExtended": "O"
+    }
+  },
+  {
+    "unitNumber": 7,
+    "nameTitle": "Mobile Apps Development",
+    "isExternalAssesment": false,
+    "unitSize": 60,
+    "priority": {
+      "certificate": "",
+      "extendedCertificate": "",
+      "foundationDiploma": "O",
+      "diploma": "O",
+      "diplomaExtended": "O"
+    }
+  },
+  {
+    "unitNumber": 8,
+    "nameTitle": "Computer Games Development",
+    "isExternalAssesment": false,
+    "unitSize": 60,
+    "priority": {
+      "certificate": "",
+      "extendedCertificate": "",
+      "foundationDiploma": "O",
+      "diploma": "O",
+      "diplomaExtended": "O"
+    }
+  },
+  {
+    "unitNumber": 9,
+    "nameTitle": "IT Project Management",
+    "isExternalAssesment": false,
+    "unitSize": 90,
+    "priority": {
+      "certificate": "",
+      "extendedCertificate": "",
+      "foundationDiploma": "",
+      "diploma": "M",
+      "diplomaExtended": "M"
+    }
+  },
+  {
+    "unitNumber": 10,
+    "nameTitle": "Big Data and Business Analytics",
+    "isExternalAssesment": false,
+    "unitSize": 60,
+    "priority": {
+      "certificate": "",
+      "extendedCertificate": "",
+      "foundationDiploma": "",
+      "diploma": "O",
+      "diplomaExtended": "O"
+    }
+  },
+  {
+    "unitNumber": 11,
+    "nameTitle": "Cyber Security and Incident Management",
+    "isExternalAssesment": true,
+    "unitSize": 120,
+    "priority": {
+      "certificate": "",
+      "extendedCertificate": "",
+      "foundationDiploma": "",
+      "diploma": "M",
+      "diplomaExtended": "M"
+    }
+  },
+  {
+    "unitNumber": 12,
+    "nameTitle": "IT Technical Support and Management",
+    "isExternalAssesment": false,
+    "unitSize": 60,
+    "priority": {
+      "certificate": "",
+      "extendedCertificate": "",
+      "foundationDiploma": "",
+      "diploma": "O",
+      "diplomaExtended": "O"
+    }
+  },
+  {
+    "unitNumber": 13,
+    "nameTitle": "Software Testing",
+    "isExternalAssesment": false,
+    "unitSize": 60,
+    "priority": {
+      "certificate": "",
+      "extendedCertificate": "",
+      "foundationDiploma": "",
+      "diploma": "O",
+      "diplomaExtended": "O"
+    }
+  },
+  {
+    "unitNumber": 14,
+    "nameTitle": "IT Service Delivery",
+    "isExternalAssesment": true,
+    "unitSize": 120,
+    "priority": {
+      "certificate": "",
+      "extendedCertificate": "",
+      "foundationDiploma": "",
+      "diploma": "",
+      "diplomaExtended": "M"
+    }
+  },
+  {
+    "unitNumber": 15,
+    "nameTitle": "Customising and Integrating Applications",
+    "isExternalAssesment": false,
+    "unitSize": 60,
+    "priority": {
+      "certificate": "",
+      "extendedCertificate": "",
+      "foundationDiploma": "",
+      "diploma": "O",
+      "diplomaExtended": "O"
+    }
+  },
+  {
+    "unitNumber": 16,
+    "nameTitle": "Cloud Storage and Collaboration Tools",
+    "isExternalAssesment": false,
+    "unitSize": 60,
+    "priority": {
+      "certificate": "",
+      "extendedCertificate": "",
+      "foundationDiploma": "",
+      "diploma": "O",
+      "diplomaExtended": "O"
+    }
+  },
+  {
+    "unitNumber": 17,
+    "nameTitle": "Digital 2D and 3D Graphics",
+    "isExternalAssesment": false,
+    "unitSize": 60,
+    "priority": {
+      "certificate": "",
+      "extendedCertificate": "",
+      "foundationDiploma": "",
+      "diploma": "O",
+      "diplomaExtended": "O"
+    }
+  },
+  {
+    "unitNumber": 18,
+    "nameTitle": "Digital Animation and Effects",
+    "isExternalAssesment": false,
+    "unitSize": 60,
+    "priority": {
+      "certificate": "",
+      "extendedCertificate": "",
+      "foundationDiploma": "",
+      "diploma": "O",
+      "diplomaExtended": "O"
+    }
+  },
+  {
+    "unitNumber": 19,
+    "nameTitle": "The Internet of Things",
+    "isExternalAssesment": false,
+    "unitSize": 60,
+    "priority": {
+      "certificate": "",
+      "extendedCertificate": "",
+      "foundationDiploma": "",
+      "diploma": "O",
+      "diplomaExtended": "O"
+    }
+  },
+  {
+    "unitNumber": 20,
+    "nameTitle": "Enterprise in IT",
+    "isExternalAssesment": false,
+    "unitSize": 60,
+    "priority": {
+      "certificate": "",
+      "extendedCertificate": "",
+      "foundationDiploma": "",
+      "diploma": "O",
+      "diplomaExtended": "O"
+    }
+  },
+  {
+    "unitNumber": 21,
+    "nameTitle": "Business Process Modelling Tools",
+    "isExternalAssesment": false,
+    "unitSize": 60,
+    "priority": {
+      "certificate": "",
+      "extendedCertificate": "",
+      "foundationDiploma": "",
+      "diploma": "O",
+      "diplomaExtended": "O"
+    }
+  }
+]

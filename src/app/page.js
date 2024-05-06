@@ -1,113 +1,143 @@
-import Image from "next/image";
+"use client";
+import React, { useState, useEffect } from 'react';
+import qualificationsData from '../data/qualifications.json';
+import assessmentsData from '../data/assessments.json';
+import unitsData from '../data/units.json';
 
-export default function Home() {
+const Page = () => {
+  const [selectedQualification, setSelectedQualification] = useState('');
+  const [selectedGrades, setSelectedGrades] = useState({});
+  const [globalScore, setGlobalScore] = useState(0);
+  const [overallGrade, setOverallGrade] = useState('');
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    const token = queryParams.get('token');
+    if (token) {
+      // Load selected qualification and grades from token in URL
+      const parsedToken = JSON.parse(atob(token));
+      setSelectedQualification(parsedToken.qualification);
+      setSelectedGrades(parsedToken.grades);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Save selected qualification and grades to URL
+    if (selectedQualification) {
+      const token = btoa(JSON.stringify({ qualification: selectedQualification, grades: selectedGrades }));
+      window.history.replaceState(null, '', `?token=${token}`);
+    }
+  }, [selectedQualification, selectedGrades]);
+
+  useEffect(() => {
+    if (!selectedQualification) return; // Do nothing if no qualification is selected
+
+    // Calculate global score when selectedGrades changes
+    let score = 0;
+    Object.keys(selectedGrades).forEach((unitNumber) => {
+      const grade = selectedGrades[unitNumber];
+      const unit = assessmentsData.find((unit) => unit.unitNumber === parseInt(unitNumber));
+      if (unit && grade) {
+        const unitSize = unit.unitSize.toString();
+        const isExternal = unit.isExternalAssesment;
+        const gradingUnits = unitsData[isExternal ? 'external' : 'internal'][unitSize];
+        let points = gradingUnits[grade];
+        // If it's an external assessment and the grade is Near Pass, add NP points
+        if (isExternal && grade === 'NP') {
+          points = gradingUnits['NP'];
+        }
+        score += points;
+      }
+    });
+    setGlobalScore(score);
+  }, [selectedGrades, selectedQualification]);
+
+  useEffect(() => {
+    if (!selectedQualification) return; // Do nothing if no qualification is selected
+
+    // Calculate overall grade based on global score and grading summary of selected qualification
+    const summary = qualificationsData[selectedQualification].summary;
+    let grade = '';
+    Object.keys(summary).forEach((key) => {
+      if (globalScore >= summary[key]) {
+        grade = key;
+      }
+    });
+    setOverallGrade(grade);
+  }, [selectedQualification, globalScore]);
+
+  const handleQualificationChange = (e) => {
+    setSelectedQualification(e.target.value);
+    // Reset selectedGrades and overallGrade when qualification changes
+    setSelectedGrades({});
+    setOverallGrade('');
+  };
+
+  const handleGradeChange = (unitNumber, e) => {
+    const grade = e.target.value;
+    setSelectedGrades(prevGrades => ({ ...prevGrades, [unitNumber]: grade }));
+  };
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="flex flex-col items-center justify-center min-h-screen dark:bg-gray-800 text-white">
+      <div className="w-full max-w-2xl p-8">
+        <h1 className="text-3xl font-semibold mb-4 text-center">BTEC Pearson L3 ICT Calculator</h1>
+        <div className="mb-4">
+          <label className="block text-gray-400">Select Qualification:</label>
+          <select
+            value={selectedQualification}
+            onChange={handleQualificationChange}
+            className="mt-1 block w-full rounded-md border-gray-600 dark:border-gray-400 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-white"
           >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+            <option value="">Select</option>
+            {Object.keys(qualificationsData).map((qualificationKey) => (
+              <option key={qualificationKey} value={qualificationKey}>
+                {qualificationsData[qualificationKey].name}
+              </option>
+            ))}
+          </select>
         </div>
+
+        {selectedQualification && (
+          <div>
+            <h2 className="text-2xl font-semibold mb-4">Unit Grades for {qualificationsData[selectedQualification].name}</h2>
+            <div className="grid grid-cols-2 gap-4 mb-4">
+              {assessmentsData.map((unit) => (
+                <div key={unit.unitNumber}>
+                  <label className="block text-gray-400">{unit.unitNumber} | {unit.nameTitle}</label>
+                  <select
+                    value={selectedGrades[unit.unitNumber] || ''}
+                    onChange={(e) => handleGradeChange(unit.unitNumber, e)}
+                    className="mt-1 block w-32 rounded-md border-gray-600 dark:border-gray-400 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-white"
+                  >
+                    <option value="">Select Grade</option>
+                    <option value="U">Unclassified</option>
+                    <option value="P">Pass</option>
+                    <option value="M">Merit</option>
+                    <option value="D">Distinction</option>
+                    {unit.isExternalAssesment && <option value="NP">Near Pass</option>}
+                  </select>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+         <br />
+      <br />
+      <br />
+      <br />
+      <br />
+
       </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-full sm:before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full sm:after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800 hover:dark:bg-opacity-30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50 text-balance`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+     
+      {selectedQualification && (
+        <div className="bg-gray-900 py-4 px-4 text-center fixed bottom-0 left-0 right-0">
+          <h2 className="text-xl font-semibold">Overall Score: {globalScore}</h2>
+          <h2 className="text-xl font-semibold mt-2">Overall Grade: {overallGrade}</h2>
+        </div>
+      )}
+    </div>
   );
-}
+};
+
+export default Page;

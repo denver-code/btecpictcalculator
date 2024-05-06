@@ -1,0 +1,75 @@
+{
+  "certificate": {
+    "name": "Pearson BTEC Level 3 National Certificate in Information Technology",
+    "size": 180,
+    "mandatory_units": 2,
+    "optional_units": 0,
+    "summary": {
+      "U": 0,
+      "P": 18,
+      "M": 26,
+      "D": 42,
+      "D*": 48
+    }
+  },
+  "extendedCertificate": {
+    "name": "Pearson BTEC Level 3 National Extended Certificate in Information Technology",
+    "size": 360,
+    "mandatory_units": 3,
+    "optional_units": 1,
+    "summary": {
+      "U": 0,
+      "P": 36,
+      "M": 52,
+      "D": 74,
+      "D*": 90
+    }
+  },
+  "foundationDiploma": {
+    "name": "Pearson BTEC Level 3 National Foundation Diploma in Information Technology",
+    "size": 510,
+    "mandatory_units": 4,
+    "optional_units": 2,
+    "summary": {
+      "U": 0,
+      "P": 51,
+      "M": 73,
+      "D": 104,
+      "D*": 130
+    }
+  },
+  "diploma": {
+    "name": "Pearson BTEC Level 3 National Diploma in Information Technology",
+    "size": 720,
+    "mandatory_units": 6,
+    "optional_units": 2,
+    "summary": {
+      "U": 0,
+      "PP": 72,
+      "MM": 104,
+      "DM": 124,
+      "DD": 144,
+      "D*D": 162,
+      "D*D*": 180
+    }
+  },
+  "diplomaExtended": {
+    "name": "Pearson BTEC Level 3 National Extended Diploma in Information Technology",
+    "size": 1080,
+    "mandatory_units": 7,
+    "optional_units": 6,
+    "summary": {
+      "U": 0,
+      "PPP": 108,
+      "MPP": 124,
+      "MMP": 140,
+      "MMM": 156,
+      "DMM": 176,
+      "DDM": 196,
+      "DDD": 216,
+      "D*DD": 234,
+      "D*D*D": 252,
+      "D*D*D*": 270
+    }
+  }
+}
