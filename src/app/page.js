@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import qualificationsData from '../data/qualifications.json';
 import assessmentsData from '../data/assessments.json';
 import unitsData from '../data/units.json';
+import NoticeBox from './noticeBox';
 
 const Page = () => {
   const [selectedQualification, setSelectedQualification] = useState('');
@@ -60,6 +61,9 @@ const Page = () => {
   };
 
   return (
+    <div>
+      <NoticeBox/>
+    
     <div className="flex flex-col items-center justify-center min-h-screen dark:bg-gray-800 text-white">
       <div className="w-full max-w-2xl p-8">
         <h1 className="text-3xl font-semibold mb-4 text-center">Qualification Dropdown</h1>
@@ -115,8 +119,8 @@ const Page = () => {
           </div>
         )}
       </div>
-
      
+    </div>
     </div>
   );
 };
