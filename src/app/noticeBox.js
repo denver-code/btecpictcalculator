@@ -13,12 +13,32 @@ const NoticeBox = () => {
         <div className="bg-black bg-opacity-50 absolute inset-0"></div>
         <div className="bg-white rounded-lg p-8 max-w-md relative z-50">
           <div className="mb-4">
-            <h2 className="text-lg font-semibold mb-2">Notice:</h2>
+            <h2 className="text-xl font-semibold mb-2">Note</h2>
+            
             <p className="text-sm text-gray-700">
+              <h3 className="text-lg font-semibold mb-2">Credits</h3>
+              All the work is done by Ihor Savenko ( <a href="https://github.com/denver-code" className="text-blue-500 hover:underline">
+                denver-code 
+                </a> )
+                <br />
+                Email: <a href="mailto:csigorek@gmail.com" className="text-blue-500 hover:underline">
+                  csigorek@gmail.com
+                </a>
+                <br />
+                Let me know if you have any questions or suggestions.
+               <br /><br />
+                <h3 className="text-lg font-semibold mb-2">Sharing</h3>
               You can share your results with your friends, teachers or simply save it for later by copying the link
-              from the address bar. We utilize token-based sharing, so you can share your results without any personal
-              data being shared nor saving any information on the server side. Data is taken from BTEC Pearson L3 ICT
-              specification. But if it's changed or some data is incorrect, please let us know via issues on GitHub.
+              from the address bar. 
+              <br /> <br />
+              We utilize token-based sharing, so you can share your results without any personal
+              data being shared nor saving any information on the server side.  <br />
+               <br /> <br />
+                <h3 className="text-lg font-semibold mb-2">Source of data</h3>
+              Data is taken from BTEC Pearson L3 ICT specification that you can find  <a href="https://github.com/denver-code/btecpictcalculator/blob/main/specification-pearson-btec-level-3-national-extended-certificate-in-information-technology.pdf" className="text-blue-500 hover:underline">
+               here
+                </a>. But if it's changed or some data is incorrect, please let us know via issues on GitHub.
+               <br /> <br />
               <a href="https://github.com/denver-code/btecpictcalculator/issues" className="text-blue-500 hover:underline">
                 Report an issue
                 </a>
