@@ -87,7 +87,7 @@ const Page = () => {
         {selectedQualification && (
           <div>
             <h2 className="text-2xl font-semibold mb-4">Unit Grades for {qualificationsData[selectedQualification].name}</h2>
-            <div className="grid grid-cols-3 gap-4 mb-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               {/* External Assessment Units */}
               {assessmentsData.map((unit) => {
                 if (unit.isExternalAssesment && selectedQualification in unit.priority && unit.priority[selectedQualification] !== "") {
