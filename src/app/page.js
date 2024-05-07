@@ -3,31 +3,12 @@ import React, { useState, useEffect } from 'react';
 import qualificationsData from '../data/qualifications.json';
 import assessmentsData from '../data/assessments.json';
 import unitsData from '../data/units.json';
-import NoticeBox from './noticeBox';
+
 const Page = () => {
   const [selectedQualification, setSelectedQualification] = useState('');
   const [selectedGrades, setSelectedGrades] = useState({});
   const [globalScore, setGlobalScore] = useState(0);
   const [overallGrade, setOverallGrade] = useState('');
-
-  useEffect(() => {
-    const queryParams = new URLSearchParams(window.location.search);
-    const token = queryParams.get('token');
-    if (token) {
-      // Load selected qualification and grades from token in URL
-      const parsedToken = JSON.parse(atob(token));
-      setSelectedQualification(parsedToken.qualification);
-      setSelectedGrades(parsedToken.grades);
-    }
-  }, []);
-
-  useEffect(() => {
-    // Save selected qualification and grades to URL
-    if (selectedQualification) {
-      const token = btoa(JSON.stringify({ qualification: selectedQualification, grades: selectedGrades }));
-      window.history.replaceState(null, '', `?token=${token}`);
-    }
-  }, [selectedQualification, selectedGrades]);
 
   useEffect(() => {
     if (!selectedQualification) return; // Do nothing if no qualification is selected
@@ -79,12 +60,9 @@ const Page = () => {
   };
 
   return (
-   <div>
-    <NoticeBox />
-   <div className="flex flex-col items-center justify-center min-h-screen dark:bg-gray-800 text-white">
-       
+    <div className="flex flex-col items-center justify-center min-h-screen dark:bg-gray-800 text-white">
       <div className="w-full max-w-2xl p-8">
-        <h1 className="text-3xl font-semibold mb-4 text-center">BTEC Pearson L3 ICT Calculator</h1>
+        <h1 className="text-3xl font-semibold mb-4 text-center">Qualification Dropdown</h1>
         <div className="mb-4">
           <label className="block text-gray-400">Select Qualification:</label>
           <select
@@ -105,43 +83,41 @@ const Page = () => {
           <div>
             <h2 className="text-2xl font-semibold mb-4">Unit Grades for {qualificationsData[selectedQualification].name}</h2>
             <div className="grid grid-cols-2 gap-4 mb-4">
-              {assessmentsData.map((unit) => (
-                <div key={unit.unitNumber}>
-                  <label className="block text-gray-400">{unit.unitNumber} | {unit.nameTitle}</label>
-                  <select
-                    value={selectedGrades[unit.unitNumber] || ''}
-                    onChange={(e) => handleGradeChange(unit.unitNumber, e)}
-                    className="mt-1 block w-32 rounded-md border-gray-600 dark:border-gray-400 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-white"
-                  >
-                    <option value="">Select Grade</option>
-                    <option value="U">Unclassified</option>
-                    <option value="P">Pass</option>
-                    <option value="M">Merit</option>
-                    <option value="D">Distinction</option>
-                    {unit.isExternalAssesment && <option value="NP">Near Pass</option>}
-                  </select>
-                </div>
-              ))}
+              {assessmentsData.map((unit) => {
+                if (selectedQualification in unit.priority && unit.priority[selectedQualification] !== "") {
+                  const priority = unit.priority[selectedQualification];
+                  return (
+                    <div key={unit.unitNumber} className="flex flex-col">
+                      <label className="block text-gray-400">{unit.unitNumber} | {unit.nameTitle}</label>
+                      <div className="flex flex-wrap gap-1">
+                        <span className={`bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded-full`}>{priority === "M" ? "Mandatory" : "Optional"}</span>
+                        {unit.isExternalAssesment && <span className={`bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded-full`}>External</span>}
+                      </div>
+                      <select
+                        value={selectedGrades[unit.unitNumber] || ''}
+                        onChange={(e) => handleGradeChange(unit.unitNumber, e)}
+                        className="mt-1 block w-32 rounded-md border-gray-600 dark:border-gray-400 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-white"
+                      >
+                        <option value="">Select Grade</option>
+                        <option value="U">Unclassified</option>
+                        <option value="P">Pass</option>
+                        <option value="M">Merit</option>
+                        <option value="D">Distinction</option>
+                        {unit.isExternalAssesment && <option value="NP">Near Pass</option>}
+                      </select>
+                    </div>
+                  );
+                } else {
+                  return null;
+                }
+              })}
             </div>
           </div>
         )}
-         <br />
-      <br />
-      <br />
-      <br />
-      <br />
-
       </div>
+
      
-      {selectedQualification && (
-        <div className="bg-gray-900 py-4 px-4 text-center fixed bottom-0 left-0 right-0">
-          <h2 className="text-xl font-semibold">Overall Score: {globalScore}</h2>
-          <h2 className="text-xl font-semibold mt-2">Overall Grade: {overallGrade}</h2>
-        </div>
-      )}
     </div>
-   </div>
-    
   );
 };
 
