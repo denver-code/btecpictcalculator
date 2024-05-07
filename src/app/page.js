@@ -172,6 +172,11 @@ const Page = () => {
             </div>
           </div>
         )}
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        
       </div>
    {selectedQualification && (
         <div className="bg-gray-900 py-4 px-4 text-center fixed bottom-0 left-0 right-0">
