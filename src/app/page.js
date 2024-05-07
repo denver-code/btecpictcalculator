@@ -63,8 +63,9 @@ const Page = () => {
   return (
     <div>
       <NoticeBox/>
-    
-    <div className="flex flex-col items-center justify-center min-h-screen dark:bg-gray-800 text-white">
+
+   <div className="flex flex-col items-center justify-center min-h-screen dark:bg-gray-800 text-white">
+
       <div className="w-full max-w-2xl p-8">
         <h1 className="text-3xl font-semibold mb-4 text-center">Qualification Dropdown</h1>
         <div className="mb-4">
@@ -86,15 +87,16 @@ const Page = () => {
         {selectedQualification && (
           <div>
             <h2 className="text-2xl font-semibold mb-4">Unit Grades for {qualificationsData[selectedQualification].name}</h2>
-            <div className="grid grid-cols-2 gap-4 mb-4">
+            <div className="grid grid-cols-3 gap-4 mb-4">
+              {/* External Assessment Units */}
               {assessmentsData.map((unit) => {
-                if (selectedQualification in unit.priority && unit.priority[selectedQualification] !== "") {
+                if (unit.isExternalAssesment && selectedQualification in unit.priority && unit.priority[selectedQualification] !== "") {
                   const priority = unit.priority[selectedQualification];
                   return (
                     <div key={unit.unitNumber} className="flex flex-col">
-                      <label className="block text-gray-400">{unit.unitNumber} | {unit.nameTitle}</label>
+                      <label className="block text-white">{unit.unitNumber} | {unit.nameTitle}</label>
                       <div className="flex flex-wrap gap-1">
-                        <span className={`bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded-full`}>{priority === "M" ? "Mandatory" : "Optional"}</span>
+                        <span className={`bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-full`}>{priority === "M" ? "Mandatory" : "Optional"}</span>
                         {unit.isExternalAssesment && <span className={`bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded-full`}>External</span>}
                       </div>
                       <select
@@ -115,11 +117,65 @@ const Page = () => {
                   return null;
                 }
               })}
+              {/* Mandatory Units */}
+              {assessmentsData.map((unit) => {
+                if (!unit.isExternalAssesment && selectedQualification in unit.priority && unit.priority[selectedQualification] === "M") {
+                  return (
+                    <div key={unit.unitNumber} className="flex flex-col">
+                      <label className="block text-white">{unit.unitNumber} | {unit.nameTitle}</label>
+                      <div className="flex flex-wrap gap-1">
+                        <span className={`bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-full`}>Mandatory</span>
+                      </div>
+                      <select
+                        value={selectedGrades[unit.unitNumber] || ''}
+                        onChange={(e) => handleGradeChange(unit.unitNumber, e)}
+                        className="mt-1 block w-32 rounded-md border-gray-600 dark:border-gray-400 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-white"
+                      >
+                        <option value="">Select Grade</option>
+                        <option value="U">Unclassified</option>
+                        <option value="P">Pass</option>
+                        <option value="M">Merit</option>
+                        <option value="D">Distinction</option>
+                      </select>
+                    </div>
+                  );
+                } else {
+                  return null;
+                }
+              })}
+              {/* Optional Units */}
+              {assessmentsData.map((unit) => {
+                if (!unit.isExternalAssesment && selectedQualification in unit.priority && unit.priority[selectedQualification] === "O") {
+                  return (
+                    <div key={unit.unitNumber} className="flex flex-col">
+                      <label className="block text-white">{unit.unitNumber} | {unit.nameTitle}</label>
+                      <div className="flex flex-wrap gap-1">
+                        <span className={`bg-yellow-500 text-white text-xs font-semibold px-2 py-1 rounded-full`}>Optional</span>
+                      </div>
+                      <select
+                        value={selectedGrades[unit.unitNumber] || ''}
+                        onChange={(e) => handleGradeChange(unit.unitNumber, e)}
+                        className="mt-1 block w-32 rounded-md border-gray-600 dark:border-gray-400 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 dark:bg-gray-700 dark:text-white"
+                      >
+                        <option value="">Select Grade</option>
+                        <option value="U">Unclassified</option>
+                        <option value="P">Pass</option>
+                        <option value="M">Merit</option>
+                        <option value="D">Distinction</option>
+                      </select>
+                    </div>
+                  );
+                } else {
+                  return null;
+                }
+              })}
             </div>
           </div>
         )}
       </div>
-     
+   
+    </div>
+
     </div>
     </div>
   );
