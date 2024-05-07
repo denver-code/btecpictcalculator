@@ -64,7 +64,7 @@ const Page = () => {
     <div>
       <NoticeBox/>
       
-    <div className="flex flex-col items-center justify-center min-h-screen dark:bg-gray-800 text-white">
+   <div className="flex flex-col items-center justify-center min-h-screen dark:bg-gray-800 text-white">
       <div className="w-full max-w-2xl p-8">
         <h1 className="text-3xl font-semibold mb-4 text-center">Qualification Dropdown</h1>
         <div className="mb-4">
@@ -93,9 +93,9 @@ const Page = () => {
                   const priority = unit.priority[selectedQualification];
                   return (
                     <div key={unit.unitNumber} className="flex flex-col">
-                      <label className="block text-gray-400">{unit.unitNumber} | {unit.nameTitle}</label>
+                      <label className="block text-white">{unit.unitNumber} | {unit.nameTitle}</label>
                       <div className="flex flex-wrap gap-1">
-                        <span className={`bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded-full`}>{priority === "M" ? "Mandatory" : "Optional"}</span>
+                        <span className={`bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-full`}>{priority === "M" ? "Mandatory" : "Optional"}</span>
                         {unit.isExternalAssesment && <span className={`bg-green-500 text-white text-xs font-semibold px-2 py-1 rounded-full`}>External</span>}
                       </div>
                       <select
@@ -121,7 +121,10 @@ const Page = () => {
                 if (!unit.isExternalAssesment && selectedQualification in unit.priority && unit.priority[selectedQualification] === "M") {
                   return (
                     <div key={unit.unitNumber} className="flex flex-col">
-                      <label className="block text-gray-400">{unit.unitNumber} | {unit.nameTitle}</label>
+                      <label className="block text-white">{unit.unitNumber} | {unit.nameTitle}</label>
+                      <div className="flex flex-wrap gap-1">
+                        <span className={`bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded-full`}>Mandatory</span>
+                      </div>
                       <select
                         value={selectedGrades[unit.unitNumber] || ''}
                         onChange={(e) => handleGradeChange(unit.unitNumber, e)}
@@ -144,7 +147,10 @@ const Page = () => {
                 if (!unit.isExternalAssesment && selectedQualification in unit.priority && unit.priority[selectedQualification] === "O") {
                   return (
                     <div key={unit.unitNumber} className="flex flex-col">
-                      <label className="block text-gray-400">{unit.unitNumber} | {unit.nameTitle}</label>
+                      <label className="block text-white">{unit.unitNumber} | {unit.nameTitle}</label>
+                      <div className="flex flex-wrap gap-1">
+                        <span className={`bg-yellow-500 text-white text-xs font-semibold px-2 py-1 rounded-full`}>Optional</span>
+                      </div>
                       <select
                         value={selectedGrades[unit.unitNumber] || ''}
                         onChange={(e) => handleGradeChange(unit.unitNumber, e)}
