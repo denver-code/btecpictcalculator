@@ -67,9 +67,9 @@ const Page = () => {
    <div className="flex flex-col items-center justify-center min-h-screen dark:bg-gray-800 text-white">
 
       <div className="w-full max-w-2xl p-8">
-        <h1 className="text-3xl font-semibold mb-4 text-center">Qualification Dropdown</h1>
+        <h1 className="text-3xl font-semibold mb-4 text-center">BTEC Pearson L3 ICT Calculator</h1>
         <div className="mb-4">
-          <label className="block text-gray-400">Select Qualification:</label>
+          <label className="block text-gray-400">Select Target Qualification:</label>
           <select
             value={selectedQualification}
             onChange={handleQualificationChange}
