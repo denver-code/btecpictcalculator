@@ -83,7 +83,7 @@ const Page = () => {
           </div>
 
           {selectedQualification && (
-            <div>
+            <div className='mb-20'>
               <h2 className="text-2xl font-semibold ">Unit Grades for {qualificationsData[selectedQualification].name}</h2>
               <p className='text-l text-gray-300 mb-4'>
                 GLH: {qualificationsData[selectedQualification].size} 
