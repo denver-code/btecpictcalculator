@@ -173,7 +173,12 @@ const Page = () => {
           </div>
         )}
       </div>
-   
+   {selectedQualification && (
+        <div className="bg-gray-900 py-4 px-4 text-center fixed bottom-0 left-0 right-0">
+          <h2 className="text-xl font-semibold">Overall Score: {globalScore}</h2>
+          <h2 className="text-xl font-semibold mt-2">Overall Grade: {overallGrade}</h2>
+        </div>
+      )}
     </div>
 
     </div>
