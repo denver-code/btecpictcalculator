@@ -12,6 +12,26 @@ const Page = () => {
   const [overallGrade, setOverallGrade] = useState('');
 
   useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    const token = queryParams.get('token');
+    if (token) {
+      // Load selected qualification and grades from token in URL
+      const parsedToken = JSON.parse(atob(token));
+      setSelectedQualification(parsedToken.qualification);
+      setSelectedGrades(parsedToken.grades);
+    }
+  }, []);
+
+
+   useEffect(() => {
+    // Save selected qualification and grades to URL
+    if (selectedQualification) {
+      const token = btoa(JSON.stringify({ qualification: selectedQualification, grades: selectedGrades }));
+      window.history.replaceState(null, '', `?token=${token}`);
+    }
+  }, [selectedQualification, selectedGrades]);
+
+  useEffect(() => {
     if (!selectedQualification) return; // Do nothing if no qualification is selected
 
     // Calculate global score when selectedGrades changes
