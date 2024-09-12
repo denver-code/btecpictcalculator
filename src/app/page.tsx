@@ -165,8 +165,8 @@ export default function Page() {
                 <p>Mandatory Units: {(qualificationsData[selectedQualification as keyof typeof qualificationsData] as Qualification).mandatory_units}</p>
                 <p>Optional Units: {(qualificationsData[selectedQualification as keyof typeof qualificationsData] as Qualification).optional_units}</p>
               </div>
-              <ScrollArea className="h-[40vh]">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* <ScrollArea className="h-[40vh]"> */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-max">
                   {(assessmentsData as Assessment[]).map((unit) => {
                     if (selectedQualification in unit.priority && unit.priority[selectedQualification] !== "") {
                       const priority = unit.priority[selectedQualification]
@@ -200,7 +200,7 @@ export default function Page() {
                     return null
                   })}
                 </div>
-              </ScrollArea>
+              {/* </ScrollArea> */}
             </CardContent>
           </Card>
         )}
