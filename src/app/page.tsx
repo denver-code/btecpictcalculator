@@ -123,10 +123,17 @@ export default function Page() {
   }
 
   return (
-    <div className="flex flex-col items-center justify-center  bg-background text-foreground">
+    <div className="flex flex-col items-center   bg-background text-foreground">
       <NoticeBox isOpen={isNoticeBoxOpen} onClose={() => setIsNoticeBoxOpen(false)} />
-      <div className="w-full max-w-3xl p-8">
-        <h1 className="text-3xl font-semibold mb-4 text-center">BTEC Pearson L3 ICT Calculator</h1>
+      <div className="w-full max-w-3xl">
+        <h1 className="text-3xl font-semibold mb-2 text-center">BTEC Pearson L3 ICT Calculator</h1>
+        <p className="text-lg text-center">
+          An easy way to quickly calculate your BTEC Pearson L3 ICT grades.
+        </p>
+        {/*  */}
+        <p className="text-md text-muted-foreground mb-4   text-center">
+          Let us know if you like new design!
+        </p>
         <Card className="mb-8">
           <CardHeader>
             <CardTitle>Select Target Qualification</CardTitle>
@@ -148,7 +155,7 @@ export default function Page() {
         </Card>
 
         {selectedQualification && (
-          <Card className="mb-40 md:mb-20">
+          <Card className="mb-40">
             <CardHeader>
               <CardTitle>Unit Grades for {(qualificationsData[selectedQualification as keyof typeof qualificationsData] as Qualification).name}</CardTitle>
             </CardHeader>
