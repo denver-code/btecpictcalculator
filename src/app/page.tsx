@@ -206,11 +206,12 @@ export default function Page() {
         )}
         <Card className="fixed bottom-0 left-0 right-0 bg-card">
           <CardContent className="py-4 px-4 text-center">
-            <p className="text-xl font-semibold">Overall Score: {globalScore}</p>
-            <p className="text-xl font-semibold mt-2">Overall Grade: {overallGrade}</p>
-            {/* if token is not empty - show copy button */}
-            {selectedQualification && (
+            <p className="text-m font-semibold">Overall Score: {globalScore}</p>
+            <div className="flex flex-row space-x-6 justify-center items-center">
+              <p className="text-m font-semibold mt-2">Overall Grade: {overallGrade}</p>
+               {selectedQualification && (
               <Button
+                size="sm"
                 className="mt-4 bg-primary text-white font-semibold py-2 px-4 rounded-lg"
                 onClick={() => {
                   const token = btoa(JSON.stringify({ qualification: selectedQualification, grades: selectedGrades }))
@@ -224,6 +225,8 @@ export default function Page() {
                 Copy Link
               </Button>
             )}
+            </div>
+           
           </CardContent>
         </Card>
       </div>

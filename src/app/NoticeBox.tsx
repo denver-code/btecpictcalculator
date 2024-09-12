@@ -36,8 +36,8 @@ export default function NoticeBox({ isOpen, onClose }: NoticeBoxProps) {
   }, [])
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[425px]">
+    <Dialog open={isOpen} onOpenChange={onClose} >
+      <DialogContent className="sm:max-w-[425px] px-4">
         <DialogHeader>
           <DialogTitle>Note</DialogTitle>
         </DialogHeader>
@@ -97,6 +97,13 @@ export default function NoticeBox({ isOpen, onClose }: NoticeBoxProps) {
                 Report an issue
                 <ExternalLink className="ml-1 h-3 w-3" />
               </Link>
+            </p>
+          </div>
+
+           <div>
+            <h3 className="text-lg font-semibold mb-2">Tech Stack</h3>
+            <p className="text-sm text-foreground">
+                Made with ❤️ using Next.js, Tailwind CSS, Shadcn/ui, TypeScript, Cloudflare, Github and Vercel.
             </p>
           </div>
         </div>
