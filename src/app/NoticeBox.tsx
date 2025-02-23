@@ -30,7 +30,7 @@ export default function NoticeBox({ isOpen, onClose }: NoticeBoxProps) {
       setIsDomain(currentUrl === 'btecpictcalculator.vercel.app')
       if (currentUrl === 'btecpictcalculator.vercel.app') {
         // redirect to the new domain using next/navigation
-        router.push('https://btec-calculator.savenko.tech')
+        router.push('https://btec-calculator.ihorsavenko.com')
       }
     }
   }, [])
@@ -49,7 +49,7 @@ export default function NoticeBox({ isOpen, onClose }: NoticeBoxProps) {
                 You're using the old domain! 
                   <br/><br/>
                 We've migrated to the{' '}
-                <Link href="https://btec-calculator.savenko.tech" className="font-medium underline underline-offset-4">
+                <Link href="https://btec-calculator.ihorsavenko.com" className="font-medium underline underline-offset-4">
                   btec-calculator.savenko.tech
                 </Link>{' '}
                 domain. Please update your bookmarks, however, you can still use the current domain.
@@ -63,13 +63,13 @@ export default function NoticeBox({ isOpen, onClose }: NoticeBoxProps) {
               All the work is done by Ihor Savenko <br/>
               ( <Link href="https://github.com/denver-code/btecpictcalculator/" className="font-medium underline underline-offset-4">
                 denver-code
-              </Link> | <Link href="https://savenko.tech" className="font-medium underline underline-offset-4">
+              </Link> | <Link href="https://ihorsavenko.com" className="font-medium underline underline-offset-4">
                 savenko.tech
               </Link> )<br />
               Email: <Link href="mailto:csigorek@gmail.com" className="font-medium underline underline-offset-4">
                 csigorek@gmail.com
-              </Link> or <Link href="mailto:ihor@savenko.tech" className="font-medium underline underline-offset-4">
-                ihor@savenko.tech
+              </Link> or <Link href="mailto:contact@ihorsavenko.com" className="font-medium underline underline-offset-4">
+                contact@ihorsavenko.com
               </Link><br />
               Let me know if you have any questions or suggestions.
             </p>
