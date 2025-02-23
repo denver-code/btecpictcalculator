@@ -64,7 +64,7 @@ export default function NoticeBox({ isOpen, onClose }: NoticeBoxProps) {
               ( <Link href="https://github.com/denver-code/btecpictcalculator/" className="font-medium underline underline-offset-4">
                 denver-code
               </Link> | <Link href="https://ihorsavenko.com" className="font-medium underline underline-offset-4">
-                savenko.tech
+                ihorsavenko.com
               </Link> )<br />
               Email: <Link href="mailto:csigorek@gmail.com" className="font-medium underline underline-offset-4">
                 csigorek@gmail.com
